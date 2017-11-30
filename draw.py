@@ -1,6 +1,7 @@
 import shutil
 from math import ceil
 import random
+from enum import Enum
 
 term_width = shutil.get_terminal_size().columns
 
@@ -9,7 +10,6 @@ RIGHT_END = '>'
 BASE_CHAR = '#'
 FILLER_CHARS = []
 SIZE_RANGE = (8, 50)
-
 
 '''  v
     >X<
@@ -39,7 +39,6 @@ def print_star():
     print_centered('v')
     print_centered(LEFT_END + 'X' + RIGHT_END)
     print_centered('A')    
-
 
 def print_base(height, width):
     base_string = ""
@@ -83,7 +82,13 @@ def print_tree(tree_height, base_height):
 while True:
     tree_height = 0
     while tree_height < SIZE_RANGE[0] or tree_height > SIZE_RANGE[1]:
-        tree_height = int(input("Tree height (" + str(SIZE_RANGE[0]) + "-" + str(SIZE_RANGE[1]) + "): "))
+        user_input = input("Tree height (" + str(SIZE_RANGE[0]) + "-" + str(SIZE_RANGE[1]) + ") ('q' to quit): ")
+        if user_input == 'q':
+            exit()
+        try:
+            tree_height = int(user_input)
+        except ValueError:
+            print("Please enter a number between 8 and 50!")
     base_height = int(ceil(tree_height / 8))
     base_width = int(ceil(tree_height / 12))
     if base_width % 2 == 0:

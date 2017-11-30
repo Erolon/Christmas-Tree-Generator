@@ -1,7 +1,6 @@
 import shutil
 from math import ceil
 import random
-from enum import Enum
 
 term_width = shutil.get_terminal_size().columns
 
